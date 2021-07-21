@@ -1,0 +1,12 @@
+prereqs:
+  runtime:
+    requires:
+      perl: { version: '5.008001' }
+      CPAN::Meta::Prereqs:
+      CPAN::Meta::Requirements: { version: '2.130' }
+      Exporter: { version: '5.57' }
+      YAML::PP: { version: '0.027' }
+  test:
+    requires:
+      Test2::V0:
+      Module::CPANfile:
