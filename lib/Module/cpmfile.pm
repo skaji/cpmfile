@@ -61,7 +61,10 @@ sub prereqs {
 
 sub features {
     my $self = shift;
-    $self->{features};
+    if (%{$self->{features}}) {
+        return $self->{features};
+    }
+    return;
 }
 
 sub _feature_prereqs {
