@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/skaji/cpmfile/workflows/test/badge.svg)](https://github.com/skaji/cpmfile/actions)
+
 # NAME
 
 Module::cpmfile - Parse cpmfile
