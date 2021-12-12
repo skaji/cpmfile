@@ -80,25 +80,25 @@ sub _feature_prereqs {
 
 sub effective_requirements {
     my ($self, $feature_ids, $phases, $types) = @_;
-    my %requirement;
+    my %req;
     for my $prereqs ($self->{prereqs}, $self->_feature_prereqs($feature_ids)) {
         $prereqs->walk($phases, $types, sub {
             my (undef, undef, $package, $options) = @_;
-            if (exists $requirement{$package}) {
-                my $v1 = $requirement{$package}{version} || 0;
+            if (exists $req{$package}) {
+                my $v1 = $req{$package}{version} || 0;
                 my $v2 = $options->{version} || 0;
                 my $version  = merge_version $v1, $v2;
-                $requirement{$package} = +{
-                    %{$requirement{$package}},
+                $req{$package} = +{
+                    %{$req{$package}},
                     %$options,
                     $version ? (version => $version) : (),
                 };
             } else {
-                $requirement{$package} = $options;
+                $req{$package} = $options;
             }
         });
     }
-    \%requirement;
+    \%req;
 }
 
 1;
