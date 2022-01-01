@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use CPAN::Meta::Prereqs;
+use Module::cpmfile::Util '_yaml_hash';
 
 my @PHASE = qw(runtime configure build test develop);
 my @TYPE = qw(requires recommends suggests);
@@ -67,6 +68,35 @@ sub walk {
             }
         }
     }
+}
+
+sub to_string {
+    my $self = shift;
+    my $indent = shift || "";
+    my @out;
+    push @out, "prereqs:";
+    for my $phase (@PHASE) {
+        my $spec1 = $self->{$phase} or next;
+        push @out, "  $phase:";
+        for my $type (@TYPE) {
+            my $spec2 = $spec1->{$type} or next;
+            push @out, "    $type:";
+            for my $package (sort keys %{$spec2}) {
+                if (my %option = %{ $spec2->{$package} || +{} }) {
+                    my @key = keys %option;
+                    if (@key == 1 && $key[0] eq "version") {
+                        push @out, "      $package: { version: '$option{version}' }";
+                    } else {
+                        push @out, "      $package:";
+                        push @out, _yaml_hash(\%option, "        ");
+                    }
+                } else {
+                    push @out, "      $package:";
+                }
+            }
+        }
+    }
+    join "\n", map { "$indent$_" } @out;
 }
 
 1;

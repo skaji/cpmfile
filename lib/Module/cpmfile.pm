@@ -6,7 +6,7 @@ use warnings;
 our $VERSION = '0.003';
 
 use Module::cpmfile::Prereqs;
-use Module::cpmfile::Util 'merge_version';
+use Module::cpmfile::Util qw(merge_version _yaml_hash);
 use YAML::PP ();
 
 sub load {
@@ -99,6 +99,26 @@ sub effective_requirements {
         });
     }
     \%req;
+}
+
+sub to_string {
+    my $self = shift;
+    my @out;
+    push @out, $self->prereqs->to_string;
+    if (my $features = $self->features) {
+        push @out, "features:";
+        for my $id (sort keys %$features) {
+            my $feature = $features->{$id};
+            push @out, "  $id:";
+            if (my $desc = $feature->{description}) {
+                push @out, _yaml_hash({ description => $desc }, "    ");
+            }
+            if (my $prereqs = $feature->{prereqs}) {
+                push @out, $prereqs->to_string("    ");
+            }
+        }
+    }
+    ( join "\n", @out ) . "\n";
 }
 
 1;
