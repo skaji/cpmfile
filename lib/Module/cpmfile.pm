@@ -3,7 +3,7 @@ use 5.008001;
 use strict;
 use warnings;
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Module::cpmfile::Prereqs;
 use Module::cpmfile::Util qw(merge_version _yaml_hash);
