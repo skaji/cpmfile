@@ -2,6 +2,9 @@ Revision history for Module-cpmfile
 
 {{$NEXT}}
 
+0.005  2022-01-03 13:07:30 JST
+    - Add from_cpanmeta method (#2)
+
 0.004  2022-01-02 00:44:53 JST
     - Add to_string method (#1)
 
