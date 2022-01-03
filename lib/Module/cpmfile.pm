@@ -24,11 +24,7 @@ sub new {
         my $prereqs = Module::cpmfile::Prereqs->new($hash->{features}{$id}{prereqs});
         $feature{$id} = { description => $description, prereqs => $prereqs };
     }
-    bless {
-        prereqs => $prereqs,
-        features => \%feature,
-        _mirrors => [],
-    }, $class;
+    bless { prereqs => $prereqs, features => \%feature, _mirrors => [] }, $class;
 }
 
 sub from_cpanfile {
@@ -52,6 +48,19 @@ sub from_cpanfile {
     }
     my $mirrors = $cpanfile->mirrors;
     bless { prereqs => $prereqs, features => \%feature, _mirrors => $mirrors }, $class;
+}
+
+sub from_cpanmeta {
+    my ($class, $cpanmeta) = @_;
+    my %feature;
+    for my $id (keys %{$cpanmeta->optional_features}) {
+        my $f = $cpanmeta->optional_features->{$id};
+        my $description = $f->{description};
+        my $prereqs = Module::cpmfile::Prereqs->from_cpanmeta($f->{prereqs});
+        $feature{$id} = { description => $description, prereqs => $prereqs };
+    }
+    my $prereqs = Module::cpmfile::Prereqs->from_cpanmeta($cpanmeta->prereqs);
+    bless { prereqs => $prereqs, features => \%feature, _mirrors => [] }, $class;
 }
 
 sub prereqs {

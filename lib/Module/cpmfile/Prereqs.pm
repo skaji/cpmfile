@@ -4,6 +4,7 @@ use warnings;
 
 use CPAN::Meta::Prereqs;
 use Module::cpmfile::Util '_yaml_hash';
+use Scalar::Util 'blessed';
 
 my @PHASE = qw(runtime configure build test develop);
 my @TYPE = qw(requires recommends suggests);
@@ -26,7 +27,10 @@ sub new {
 
 sub from_cpanmeta {
     my ($class, $cpanmeta) = @_;
-    my $hash = $cpanmeta->as_string_hash;
+    my $hash = $cpanmeta;
+    if (blessed $cpanmeta and $cpanmeta->isa('CPAN::Meta::Prereqs')) {
+        $hash = $cpanmeta->as_string_hash;
+    }
     my $out = {};
     for my $phase (sort keys %$hash) {
         for my $type (sort keys %{ $hash->{$phase} }) {

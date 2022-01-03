@@ -24,6 +24,7 @@
             "CPAN::Meta::Prereqs" : "0",
             "CPAN::Meta::Requirements" : "2.130",
             "Exporter" : "5.57",
+            "Scalar::Util" : "0",
             "YAML::PP" : "0.027",
             "perl" : "5.008001"
          }
