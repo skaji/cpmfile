@@ -5,6 +5,7 @@ prereqs:
       CPAN::Meta::Prereqs:
       CPAN::Meta::Requirements: { version: '2.130' }
       Exporter: { version: '5.57' }
+      Scalar::Util:
       YAML::PP: { version: '0.027' }
   test:
     requires:
