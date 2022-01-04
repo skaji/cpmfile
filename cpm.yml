@@ -10,4 +10,4 @@ prereqs:
   test:
     requires:
       Test2::V0:
-      Module::CPANfile:
+      Module::CPANfile: { version: '1.1004' }

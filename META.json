@@ -31,7 +31,7 @@
       },
       "test" : {
          "requires" : {
-            "Module::CPANfile" : "0",
+            "Module::CPANfile" : "1.1004",
             "Test2::V0" : "0"
          }
       }
