@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/cpmfile",
+  "definitions": {
+    "cpmfile": {
+      "required": [
+        "prereqs"
+      ],
+      "properties": {
+        "features": {
+          "patternProperties": {
+            ".*": {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "$ref": "#/definitions/feature"
+            }
+          },
+          "type": "object"
+        },
+        "prereqs": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/prereqs"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "feature": {
+      "required": [
+        "prereqs"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "prereqs": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/prereqs"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "phaseSpec": {
+      "properties": {
+        "recommends": {
+          "patternProperties": {
+            ".*": {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "$ref": "#/definitions/packageOption"
+            }
+          },
+          "type": "object"
+        },
+        "requires": {
+          "patternProperties": {
+            ".*": {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "$ref": "#/definitions/packageOption"
+            }
+          },
+          "type": "object"
+        },
+        "suggests": {
+          "patternProperties": {
+            ".*": {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "$ref": "#/definitions/packageOption"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "packageOption": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "properties": {
+            "version": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true,
+          "type": "object"
+        }
+      ]
+    },
+    "prereqs": {
+      "properties": {
+        "build": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/phaseSpec"
+        },
+        "configure": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/phaseSpec"
+        },
+        "develop": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/phaseSpec"
+        },
+        "runtime": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/phaseSpec"
+        },
+        "test": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$ref": "#/definitions/phaseSpec"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    }
+  }
+}

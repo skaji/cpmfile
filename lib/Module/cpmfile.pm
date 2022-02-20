@@ -153,6 +153,8 @@ THIS IS EXPERIMENTAL.
 cpmfile (usually saved as C<cpm.yml>) is yet another file format for describing module dependencies,
 and Module::cpmfile helps you parse it.
 
+The JSON Schema for cpmfile is available at L<jsonschema.json|https://github.com/skaji/cpmfile/blob/main/jsonschema.json>.
+
 cpmfile will be used mainly by L<App::cpm>.
 
 =head1 SEE ALSO
