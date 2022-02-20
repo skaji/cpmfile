@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use CPAN::Meta;
+use Module::CPANfile;
+use Module::cpmfile;
+
+if (!@ARGV || $ARGV[0] =~ /^(-h|--help)$/) {
+    die "Usage: convert-to-cpmfile [cpanfile/META.json]\n";
+}
+
+my $path = shift;
+
+if ($path =~ /cpanfile$/) {
+    my $cpanfile = Module::CPANfile->load($path);
+    my $cpmfile = Module::cpmfile->from_cpanfile($cpanfile);
+    print $cpmfile->to_string;
+} elsif ($path =~ /META\.(json|yml)$/) {
+    my $meta = CPAN::Meta->load_file($path);
+    my $cpmfile = Module::cpmfile->from_cpanmeta($meta);
+    print $cpmfile->to_string;
+} else {
+    die "Unknown file format: $path\n";
+}
