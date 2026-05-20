@@ -1,6 +1,7 @@
 Revision history for Module-cpmfile
 
 {{$NEXT}}
+  - Raise minimum Perl to v5.24
 
 0.006  2022-02-20 15:08:24 JST
     - Add JSON Schema for cpmfile (#3)
