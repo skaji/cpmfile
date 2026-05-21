@@ -28,9 +28,12 @@ cpmfile will be used mainly by [App::cpm](https://metacpan.org/pod/App%3A%3Acpm)
 
 [App::cpm](https://metacpan.org/pod/App%3A%3Acpm)
 
-# AUTHOR
+# ARTIFACT ATTESTATIONS
 
-Shoichi Kaji <skaji@cpan.org>
+GitHub Artifact Attestations are generated for release tarballs uploaded to
+CPAN. If you care about provenance for the uploaded tarballs, see:
+
+[https://github.com/skaji/cpmfile/attestations](https://github.com/skaji/cpmfile/attestations)
 
 # COPYRIGHT AND LICENSE
 
