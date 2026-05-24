@@ -53,6 +53,7 @@ my @prereq = (
 );
 
 my @plugin = (
+    'ExecDir' => [ dir => 'script' ],
     'Git::GatherDir' => [ exclude_filename => 'META.json' ],
     'CopyFilesFromBuild' => [ copy => 'META.json' ],
     '=VersionFromMainModule' => [],
